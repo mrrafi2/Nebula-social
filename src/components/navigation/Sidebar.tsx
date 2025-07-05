@@ -7,24 +7,28 @@ import {
   Users, 
   Image, 
   Bookmark, 
-  Settings, 
-  LogOut 
+ Calendar,
+ Trophy,
+ ShoppingBag,
+ 
 } from 'lucide-react';
 
 interface SidebarProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
+  
 }
 
-const sidebarItems = [
+ export const sidebarItems = [
   { id: 'feed', icon: Home, label: 'Feed' },
   { id: 'explore', icon: Compass, label: 'Explore' },
-  { id: 'ai-suggestions', icon: Sparkles, label: 'AI Suggestions' },
+  { id:'ai-suggestions', icon:Sparkles, label:'AI Suggestions'},
   { id: 'communities', icon: Users, label: 'Communities' },
   { id: 'media-vault', icon: Image, label: 'Media Vault' },
   { id: 'saved', icon: Bookmark, label: 'Saved' },
-  { id: 'settings', icon: Settings, label: 'Settings' },
-  { id: 'logout', icon: LogOut, label: 'Logout' },
+  { id: 'marketplace', icon: ShoppingBag, label: 'Marketplace' },  
+  { id: 'events', icon: Calendar, label: 'Events' },      
+  { id: 'challenges', icon: Trophy, label: 'Challenges' },  
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => {
@@ -33,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => 
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="h-full glass-card border-r border-glass-white-20 p-4"
+      className="h-fit glass-card border-r border-glass-white-20 p-4"
     >
       <div className="flex flex-col space-y-2">
         {sidebarItems.map((item, index) => {
@@ -52,9 +56,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => onSectionChange(item.id)}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
                   isActive
-                    ? 'cosmic-gradient text-white shadow-lg'
+                    ? 'bg-cosmic-violet/70 text-white shadow-lg'
                     : 'glass-card text-gray-300 hover:text-white hover:bg-glass-white-20'
                 }`}
               >
@@ -65,20 +69,19 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onSectionChange }) => 
               {isActive && (
                 <motion.div
                   layoutId="activeIndicator"
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-8 cosmic-gradient rounded-r-full -ml-4"
+                  className="absolute left-0 top-[17%] transform -translate-y-1/2 w-1 h-8 cosmic-gradient rounded-r-full -ml-4"
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
               
               {/* Tooltip */}
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                whileHover={{ opacity: 1, x: 0 }}
-                className="absolute left-16 top-1/2 transform -translate-y-1/2 glass-card px-3 py-2 rounded-lg text-sm text-white whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300 z-50"
-              >
-                {item.label}
-                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -ml-1 w-2 h-2 cosmic-gradient rotate-45"></div>
-              </motion.div>
+               <div
+                 className="absolute left-16 top-1/2 transform -translate-y-1/2 glass-card px-3 py-2 rounded-lg text-sm text-white whitespace-nowrap
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-auto z-50"
+               >
+                    {item.label}
+                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -ml-1 w-2 h-2 cosmic-gradient rotate-45" />
+                </div>
             </motion.div>
           );
         })}

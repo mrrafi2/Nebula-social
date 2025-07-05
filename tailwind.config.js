@@ -12,7 +12,25 @@ export default {
           magenta: '#ff00ff',
           'electric-blue': '#0066ff',
           'neon-pink': '#ff006e',
+          "violet": '#8B5CF6',
+            'cosmic-gradient':
+          'linear-gradient(135deg, #1a0b2e 0%, #16213e 35%, #0f3460 70%, #0066ff 100%)',
         },
+        'glass-white-10': 'rgba(255, 255, 255, 0.10)',
+      'glass-white-20': 'rgba(255, 255, 255, 0.20)',
+
+      // Cosmic color palette
+      'cosmic-purple': '#1a0b2e',
+      'cosmic-deep-purple': '#16213e',
+      'cosmic-midnight': '#0f3460',
+      'cosmic-cyan': '#00ffff',
+      'cosmic-magenta': '#ff00ff',
+      'cosmic-electric-blue': '#0066ff',
+      'cosmic-neon-pink': '#ff006e',
+        backgroundImage: {
+        'cosmic-gradient':
+          'linear-gradient(135deg, #1a0b2e 0%, #16213e 35%, #0f3460 70%, #0066ff 100%)',
+     },
         glass: {
           white: 'rgba(255, 255, 255, 0.1)',
           'white-20': 'rgba(255, 255, 255, 0.2)',
@@ -51,6 +69,12 @@ export default {
           '100%': { transform: 'translateY(-100px) scale(0)', opacity: '0' },
         },
       },
+      fontFamily: {
+    sans: ['Inter', 'sans-serif'],
+    heading: ['Space Grotesk', 'sans-serif'],
+    mono: ['Fira Code', 'monospace'],
+    comment: ['Rubik', 'sans-serif'],
+  },
     },
   },
   plugins: [],

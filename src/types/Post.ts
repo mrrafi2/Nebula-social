@@ -22,7 +22,7 @@ export interface Post {
 
 export interface AIInsight {
   id: string;
-  type: 'mood' | 'trend' | 'suggestion' | 'memory';
+  type: 'mood' | 'trend' | 'suggestion' | 'memory' | 'habit' | 'engagement';
   title: string;
   description: string;
   action?: string;

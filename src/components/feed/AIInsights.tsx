@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, TrendingUp, Users, Clock, Sparkles, ChevronRight, X } from 'lucide-react';
+import { Sparkles, ChevronRight, X } from 'lucide-react';
 import { AIInsight } from '../../types/Post';
 
 const AIInsights: React.FC = () => {
@@ -40,6 +40,22 @@ const AIInsights: React.FC = () => {
       action: 'Revisit memory',
       icon: '💭',
     },
+    {
+    id: '5',
+    type: 'habit',
+    title: 'Daily Habit Reminder',
+    description: 'Consistent posting boosts your reach. A quick daily update keeps you top of mind.',
+    action: 'Post a daily update',
+    icon: '📅',
+  },
+  {
+    id: '6',
+    type: 'engagement',
+    title: 'High Engagement Alert',
+    description: 'Your last post received 120 likes and 30 comments—your community is active!',
+    action: 'Thank your audience',
+    icon: '💬',
+  },
   ];
 
   const getInsightColor = (type: string) => {
@@ -48,6 +64,10 @@ const AIInsights: React.FC = () => {
       case 'trend': return 'from-orange-500 to-red-500';
       case 'suggestion': return 'from-cyan-500 to-blue-500';
       case 'memory': return 'from-purple-500 to-indigo-500';
+      case 'habit':
+      return 'from-green-500 to-teal-500';
+      case 'engagement':
+      return 'from-yellow-400 to-amber-500';
       default: return 'from-gray-500 to-gray-600';
     }
   };
@@ -61,13 +81,6 @@ const AIInsights: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            className="w-8 h-8 cosmic-gradient rounded-full flex items-center justify-center"
-          >
-            <Brain className="w-4 h-4 text-white" />
-          </motion.div>
           <div>
             <h2 className="text-lg font-semibold text-white neon-text">AI Insights</h2>
             <p className="text-sm text-gray-400">Personalized for your cosmic journey</p>
@@ -170,7 +183,7 @@ const AIInsights: React.FC = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full p-3 cosmic-gradient rounded-xl text-white font-medium shadow-lg hover:shadow-xl transition-all"
+                  className="w-full p-3 bg-cosmic-neon-pink rounded-xl text-white font-medium shadow-lg hover:shadow-xl transition-all"
                 >
                   {selectedInsight.action}
                 </motion.button>

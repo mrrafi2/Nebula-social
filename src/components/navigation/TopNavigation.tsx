@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Bell, MessageCircle, Settings, User, Sparkles } from 'lucide-react';
+import { Bell, Settings, User, Sparkles } from 'lucide-react';
+import Logo from '../../assets/logo.png'
+import { useScrollDirection } from '../../hooks/useScrollDirection';
+
 
 const TopNavigation: React.FC = () => {
-  const [searchFocused, setSearchFocused] = useState(false);
   const [notifications] = useState(3);
-  const [messages] = useState(5);
+   const scrollDir = useScrollDirection();
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-glass-white-20"
+      initial={false}
+      animate={ scrollDir === 'down'
+        ? { y: -100, opacity: 0 }
+        : { y:   0, opacity: 1 } }
+      transition={{ type: 'spring', stiffness: 400, damping: 40 }}
+      className="top-nav fixed top-0 left-0 right-0 z-50 glass-card border-b border-glass-white-20  "
+      style={{marginBottom:'2rem'}}
     >
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
@@ -22,36 +27,15 @@ const TopNavigation: React.FC = () => {
           className="flex items-center space-x-2 cursor-pointer"
         >
           <motion.div
-            animate={{ rotate: 360 }}
             transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            className="w-8 h-8 cosmic-gradient rounded-full flex items-center justify-center"
+            className=" rounded-full flex items-start justify-start"
           >
-            <Sparkles className="w-5 h-5 text-white" />
+              <img src={Logo} alt="Nebula" style={{width:'80px', position:"relative", left:"0px"}}/>
           </motion.div>
-          <span className="text-xl font-bold text-white neon-text">NebulaNet</span>
+          
         </motion.div>
 
-        {/* Search Bar */}
-        <div className="flex-1 max-w-2xl mx-8">
-          <motion.div
-            animate={{ 
-              boxShadow: searchFocused 
-                ? '0 0 30px rgba(0, 255, 255, 0.4)' 
-                : '0 0 0px rgba(0, 255, 255, 0)' 
-            }}
-            className="relative"
-          >
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search users, posts, moods... Let AI help you discover"
-              className="w-full glass-card pl-12 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cosmic-cyan/50 transition-all duration-300"
-              onFocus={() => setSearchFocused(true)}
-              onBlur={() => setSearchFocused(false)}
-            />
-          </motion.div>
-        </div>
-
+        
         {/* Right Icons */}
         <div className="flex items-center space-x-4">
           {/* Notifications */}
@@ -72,24 +56,7 @@ const TopNavigation: React.FC = () => {
             )}
           </motion.button>
 
-          {/* Messages */}
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="relative p-2 glass-card rounded-full text-white hover:text-cosmic-cyan transition-colors"
-          >
-            <MessageCircle className="w-5 h-5" />
-            {messages > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 w-5 h-5 bg-cosmic-cyan rounded-full text-xs flex items-center justify-center font-bold text-black"
-              >
-                {messages}
-              </motion.span>
-            )}
-          </motion.button>
-
+          
           {/* Settings */}
           <motion.button
             whileHover={{ scale: 1.1, rotate: 90 }}
